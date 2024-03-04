@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.jasmeet.valorantapi.data.Ability
+import com.jasmeet.valorantapi.data.apiResponse.Ability
 
 
 @Entity(tableName = "agents")

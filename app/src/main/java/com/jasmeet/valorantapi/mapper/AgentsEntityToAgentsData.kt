@@ -1,8 +1,8 @@
 package com.jasmeet.valorantapi.mapper
 
-import com.jasmeet.valorantapi.data.Data
-import com.jasmeet.valorantapi.data.RecruitmentData
-import com.jasmeet.valorantapi.data.Role
+import com.jasmeet.valorantapi.data.apiResponse.Data
+import com.jasmeet.valorantapi.data.apiResponse.RecruitmentData
+import com.jasmeet.valorantapi.data.apiResponse.Role
 import com.jasmeet.valorantapi.room.data.AgentsEntity
 
 fun AgentsEntity.toAgentsData(): Data {

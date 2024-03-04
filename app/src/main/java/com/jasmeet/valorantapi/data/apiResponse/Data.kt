@@ -1,4 +1,4 @@
-package com.jasmeet.valorantapi.data
+package com.jasmeet.valorantapi.data.apiResponse
 
 data class Data(
     val abilities: List<Ability>,

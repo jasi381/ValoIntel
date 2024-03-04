@@ -1,12 +1,13 @@
-package com.jasmeet.valorantapi
+package com.jasmeet.valorantapi.viewModels
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jasmeet.valorantapi.data.AgentsData
-import com.jasmeet.valorantapi.data.Data
+import com.jasmeet.valorantapi.data.apiResponse.Data
+import com.jasmeet.valorantapi.data.agentData.AgentData
 import com.jasmeet.valorantapi.repository.AgentsRepository
 import com.jasmeet.valorantapi.state.State
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,8 +28,8 @@ class AgentsViewModel @Inject constructor(
     private val _apiResponse = MutableLiveData<State<List<Data>>>()
     val apiResponse: LiveData<State<List<Data>>> = _apiResponse
 
-    private val _agentDetails = MutableLiveData<State<AgentsData>>()
-    val agentDetails: LiveData<State<AgentsData>> = _agentDetails
+    private val _agentDetails = MutableLiveData<State<AgentData>>()
+    val agentDetails: LiveData<State<AgentData>> = _agentDetails
 
 
     fun fetchAgents() {
@@ -45,12 +46,13 @@ class AgentsViewModel @Inject constructor(
         }
     }
 
-    fun fetchAgentDate(agentId :String){
+    fun fetchAgentData(agentId :String){
         viewModelScope.launch(Dispatchers.IO) {
 
             try {
                 _agentDetails.postValue(State.Loading)
                 val result = repository.getAgentDetails(agentId)
+                Log.d("TAG", "fetchAgentData: $result")
                 if(result is State.Success) {
                     _agentDetails.postValue(result)
                 }

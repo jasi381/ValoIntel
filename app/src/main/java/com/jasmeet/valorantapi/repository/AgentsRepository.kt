@@ -1,9 +1,11 @@
 package com.jasmeet.valorantapi.repository
 
 import android.content.Context
+import android.util.Log
 import com.google.gson.Gson
-import com.jasmeet.valorantapi.data.AgentsData
-import com.jasmeet.valorantapi.data.Data
+import com.jasmeet.valorantapi.data.apiResponse.AgentsData
+import com.jasmeet.valorantapi.data.apiResponse.Data
+import com.jasmeet.valorantapi.data.agentData.AgentData
 import com.jasmeet.valorantapi.mapper.toAgentsData
 import com.jasmeet.valorantapi.mapper.toAgentsEntity
 import com.jasmeet.valorantapi.room.AgentsDao
@@ -46,12 +48,14 @@ class AgentsRepository(
         }
     }
 
-    fun getAgentDetails(agentId: String): State<AgentsData> {
-
+    fun getAgentDetails(agentId: String): State<AgentData> {
         return try {
             val agentData = makeApiCall(agentId)
             if (agentData.isNotEmpty()) {
-                State.Success(parseAgentData(agentData))
+                Log.d("AgentData", "getAgentDetails: $agentData")
+                val data = parseAgentData(agentData)
+                Log.d("AgentData2", "getAgentDetails: $data")
+                State.Success(data)
             } else {
                 State.Error("Network Error")
             }
@@ -90,9 +94,9 @@ class AgentsRepository(
 
     }
 
-    private fun parseAgentData(result: String): AgentsData {
+    private fun parseAgentData(result: String): AgentData {
         val gson = Gson()
-        return gson.fromJson(result, AgentsData::class.java)
+        return gson.fromJson(result, AgentData::class.java)
     }
 
 

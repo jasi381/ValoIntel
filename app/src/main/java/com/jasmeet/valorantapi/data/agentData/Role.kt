@@ -1,4 +1,4 @@
-package com.jasmeet.valorantapi.data
+package com.jasmeet.valorantapi.data.agentData
 
 data class Role(
     val assetPath: String,
