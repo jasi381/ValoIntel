@@ -1,7 +1,7 @@
 package com.jasmeet.valorantapi.mapper
 
-import com.jasmeet.valorantapi.data.apiResponse.Data
-import com.jasmeet.valorantapi.room.data.AgentsEntity
+import com.jasmeet.valorantapi.data.agentsApiResponse.Data
+import com.jasmeet.valorantapi.room.agents.AgentsEntity
 
 fun Data.toAgentsEntity(): AgentsEntity {
     return uuid?.let {

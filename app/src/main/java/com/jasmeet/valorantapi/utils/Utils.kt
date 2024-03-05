@@ -2,6 +2,10 @@ package com.jasmeet.valorantapi.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.logging.HttpLoggingInterceptor
+import java.io.IOException
 
 
 object Utils {
@@ -19,6 +23,42 @@ object Utils {
         } else {
             colorString
         }
+    }
+
+     fun makeApiCall(
+         url :String,
+         id:String?=null
+     ): String {
+
+         val newUrl = if (id != null) {"$url/$id"} else{ url }
+
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+
+        val client = OkHttpClient.Builder()
+            .addInterceptor(
+                httpLoggingInterceptor.apply {
+                    level = HttpLoggingInterceptor.Level.BODY
+                }
+            )
+            .build()
+
+
+        val request = Request.Builder()
+            .url(newUrl)
+            .build()
+
+        return try {
+            val response = client.newCall(request).execute()
+
+            if (response.isSuccessful) {
+                response.body?.string() ?: ""
+            } else {
+                throw IOException("Error: ${response.code}")
+            }
+        } catch (e: IOException) {
+            throw e
+        }
+
     }
 
 

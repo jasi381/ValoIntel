@@ -1,4 +1,4 @@
-package com.jasmeet.valorantapi.data.apiResponse
+package com.jasmeet.valorantapi.data.agentsApiResponse
 
 data class AgentsData(
     val data: List<Data>,

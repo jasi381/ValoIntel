@@ -8,6 +8,7 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
+import com.jasmeet.valorantapi.navigation.ValoIntelNavigation
 import com.jasmeet.valorantapi.receiver.NetworkChangeReceiver
 import com.jasmeet.valorantapi.ui.theme.ValorantApiTheme
 import dagger.hilt.android.AndroidEntryPoint

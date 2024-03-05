@@ -1,13 +1,12 @@
 package com.jasmeet.valorantapi.viewModels
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jasmeet.valorantapi.data.apiResponse.Data
 import com.jasmeet.valorantapi.data.agentData.AgentData
+import com.jasmeet.valorantapi.data.agentsApiResponse.Data
 import com.jasmeet.valorantapi.repository.AgentsRepository
 import com.jasmeet.valorantapi.state.State
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,8 +24,8 @@ class AgentsViewModel @Inject constructor(
 
 ) :ViewModel() {
 
-    private val _apiResponse = MutableLiveData<State<List<Data>>>()
-    val apiResponse: LiveData<State<List<Data>>> = _apiResponse
+    private val _agentsApiResponse = MutableLiveData<State<List<Data>>>()
+    val agentsApiResponse: LiveData<State<List<Data>>> = _agentsApiResponse
 
     private val _agentDetails = MutableLiveData<State<AgentData>>()
     val agentDetails: LiveData<State<AgentData>> = _agentDetails
@@ -35,13 +34,13 @@ class AgentsViewModel @Inject constructor(
     fun fetchAgents() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                _apiResponse.postValue(State.Loading)
+                _agentsApiResponse.postValue(State.Loading)
                 val result = repository.fetchAgents(context)
                 if(result is State.Success) {
-                    _apiResponse.postValue(result)
+                    _agentsApiResponse.postValue(result)
                 }
             } catch (e: Exception) {
-                _apiResponse.postValue(State.Error(e.localizedMessage))
+                _agentsApiResponse.postValue(State.Error(e.localizedMessage))
             }
         }
     }
@@ -52,7 +51,6 @@ class AgentsViewModel @Inject constructor(
             try {
                 _agentDetails.postValue(State.Loading)
                 val result = repository.getAgentDetails(agentId)
-                Log.d("TAG", "fetchAgentData: $result")
                 if(result is State.Success) {
                     _agentDetails.postValue(result)
                 }

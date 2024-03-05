@@ -1,4 +1,4 @@
-package com.jasmeet.valorantapi
+package com.jasmeet.valorantapi.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -11,6 +11,7 @@ import com.jasmeet.valorantapi.screens.AgentsScreen
 import com.jasmeet.valorantapi.screens.HomeScreen
 import com.jasmeet.valorantapi.screens.Screens
 import com.jasmeet.valorantapi.screens.UUID
+import com.jasmeet.valorantapi.screens.WeaponsScreen
 
 @Composable
 fun ValoIntelNavigation(
@@ -50,6 +51,13 @@ fun ValoIntelNavigation(
                 agentUUID = it.arguments?.getString(UUID)
             )
 
+
+        }
+
+        composable(
+            route = Screens.WeaponsScreen.route
+        ) {
+            WeaponsScreen(navHostController = navHostController)
 
         }
     }

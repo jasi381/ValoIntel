@@ -102,8 +102,4 @@ dependencies {
     implementation(libs.room)
     implementation(libs.roomKtx)
     ksp(libs.roomCompiler)
-
-    //retrofit
-    implementation (libs.retrofit)
-    implementation (libs.converter.gson)
 }

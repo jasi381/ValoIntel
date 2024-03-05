@@ -1,4 +1,4 @@
-package com.jasmeet.valorantapi.data.apiResponse
+package com.jasmeet.valorantapi.data.agentsApiResponse
 
 data class Ability(
     val description: String,

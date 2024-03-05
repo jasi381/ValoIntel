@@ -8,17 +8,21 @@ import coil.memory.MemoryCache
 import coil.request.CachePolicy
 import coil.util.DebugLogger
 import com.jasmeet.valorantapi.repository.AgentsRepository
-import com.jasmeet.valorantapi.room.AgentsDatabase
+import com.jasmeet.valorantapi.repository.WeaponsRepository
+import com.jasmeet.valorantapi.room.agents.AgentsDatabase
 import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
 
 
 @HiltAndroidApp
 class ValoIntelApp:Application(),ImageLoaderFactory{
 
-    val agentsRepository :AgentsRepository
-        get() = AgentsRepository(
-            AgentsDatabase.getInstance(this).agentsDao()
-        )
+    @Inject
+    lateinit var agentsRepository: AgentsRepository
+
+    @Inject
+    lateinit var weaponsRepository: WeaponsRepository
+
 
     override fun newImageLoader(): ImageLoader {
         return ImageLoader(this)
@@ -42,4 +46,5 @@ class ValoIntelApp:Application(),ImageLoaderFactory{
             .build()
 
     }
+
 }

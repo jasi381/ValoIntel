@@ -13,4 +13,6 @@ sealed class Screens(val route:String){
             return this.route.replace("{$UUID}",uuid)
         }
     }
+
+    data object WeaponsScreen:Screens("weapons")
 }

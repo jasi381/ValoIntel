@@ -37,10 +37,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -49,7 +46,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -70,11 +66,6 @@ fun AgentDetailScreen(navHostController: NavHostController, agentUUID: String?) 
 
     val vm: AgentsViewModel = hiltViewModel()
     val agentDetails by vm.agentDetails.observeAsState(State.Loading)
-
-    var isExpanded by rememberSaveable {
-        mutableStateOf(false)
-    }
-
 
     LaunchedEffect(true) {
         vm.fetchAgentData(decodedUUid)
@@ -241,7 +232,7 @@ fun AgentDetailScreen(navHostController: NavHostController, agentUUID: String?) 
                                         .background(Color(0xff292939))
                                 ) {
                                     AsyncImage(
-                                        model = ability.displayIcon,
+                                        model = ability.displayIcon?:"https://cdn-icons-png.flaticon.com/512/2748/2748558.png",
                                         contentDescription = null,
                                         modifier = Modifier
                                             .padding(8.dp)
@@ -387,13 +378,7 @@ fun AgentDetailScreen(navHostController: NavHostController, agentUUID: String?) 
                                     color = Color(0xff9e9eb8)
                                 )
                             }
-
-
                         }
-
-
-
-
                     }
                 }
 

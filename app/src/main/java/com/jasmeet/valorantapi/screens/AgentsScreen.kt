@@ -37,12 +37,11 @@ import java.net.URLEncoder
 @Composable
 fun AgentsScreen(navHostController: NavHostController) {
 
-    val vm : AgentsViewModel = hiltViewModel()
-    val apiResponse by vm.apiResponse.observeAsState(State.Loading)
-
+    val agentsViewModel : AgentsViewModel = hiltViewModel()
+    val apiResponse by agentsViewModel.agentsApiResponse.observeAsState(State.Loading)
 
     LaunchedEffect(true) {
-        vm.fetchAgents()
+        agentsViewModel.fetchAgents()
 
     }
 

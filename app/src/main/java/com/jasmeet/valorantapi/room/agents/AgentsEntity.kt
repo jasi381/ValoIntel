@@ -1,11 +1,11 @@
-package com.jasmeet.valorantapi.room.data
+package com.jasmeet.valorantapi.room.agents
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.jasmeet.valorantapi.data.apiResponse.Ability
+import com.jasmeet.valorantapi.data.agentsApiResponse.Ability
 
 
 @Entity(tableName = "agents")
