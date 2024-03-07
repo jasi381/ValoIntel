@@ -9,13 +9,15 @@ import kotlinx.coroutines.launch
 
 @OptIn(DelicateCoroutinesApi::class)
 @Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
-class AgentsUpdateService : IntentService("AgentsUpdateService") {
+class WeaponsUpdateService :IntentService("WeaponsUpdateService"){
+
     override fun onHandleIntent(intent: Intent?) {
         val appContext = this.applicationContext
-        val repository = (appContext as ValoIntelApp).agentsRepository
+        val repository = (appContext as ValoIntelApp).weaponsRepository
 
         GlobalScope.launch {
-            repository.fetchAgents(appContext)
+            repository.fetchWeapons(appContext)
         }
     }
+
 }

@@ -24,12 +24,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.jasmeet.valorantapi.appComponents.TopAppBarComponent
+import com.jasmeet.valorantapi.appComponents.animatedBorder
 import com.jasmeet.valorantapi.state.State
+import com.jasmeet.valorantapi.ui.theme.sans
+import com.jasmeet.valorantapi.ui.theme.valorantFont
 import com.jasmeet.valorantapi.utils.Utils
 import com.jasmeet.valorantapi.viewModels.AgentsViewModel
 import java.net.URLEncoder
@@ -37,7 +42,7 @@ import java.net.URLEncoder
 @Composable
 fun AgentsScreen(navHostController: NavHostController) {
 
-    val agentsViewModel : AgentsViewModel = hiltViewModel()
+    val agentsViewModel: AgentsViewModel = hiltViewModel()
     val apiResponse by agentsViewModel.agentsApiResponse.observeAsState(State.Loading)
 
     LaunchedEffect(true) {
@@ -91,16 +96,7 @@ fun AgentsScreen(navHostController: NavHostController) {
                 LazyVerticalStaggeredGrid(
                     columns = StaggeredGridCells.Fixed(2),
                     Modifier
-                        .background(
-                            brush = Brush.verticalGradient(
-                                listOf(
-                                    Color(0xffeb953f),
-                                    Color(0xff892c1b),
-                                    Color(0xff211d21),
-                                    Color(0xff282b38),
-                                )
-                            )
-                        )
+                        .background(Color(0xff101118))
                         .fillMaxSize()
                         .padding(start = 8.dp, end = 8.dp)
                         .padding(innerPadding),
@@ -123,43 +119,65 @@ fun AgentsScreen(navHostController: NavHostController) {
                                 )
                             )
                         }
-                        Surface(
-                            modifier = Modifier
-                                .padding(top = 10.dp)
-                                .size(180.dp),
+                        Column {
+                            Surface(
+                                modifier = Modifier
+                                    .padding(top = 10.dp)
+                                    .animatedBorder(
+                                        borderColors = listOf(
+                                            Color.White,
+                                            Color.Green,
 
-                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
-                            shape = MaterialTheme.shapes.large,
-                            onClick = {
-                                val encodedUUid = URLEncoder.encode(it.uuid, "UTF-8")
-                                navHostController.navigate(Screens.AgentDetailScreen.passUuid(encodedUUid))
-                            },
-                            color = Color.Transparent
-                        ) {
-                            Column(
-                                Modifier
-                                    .fillMaxSize()
-                                    .background(
-                                        brush = Brush.verticalGradient(
-                                            colors = colorList
+                                        ),
+                                        backgroundColor = Color.White,
+                                        borderWidth = 1.dp
+                                    )
+                                    .size(180.dp),
+                                shape = MaterialTheme.shapes.large,
+                                onClick = {
+                                    val encodedUUid = URLEncoder.encode(it.uuid, "UTF-8")
+                                    navHostController.navigate(
+                                        Screens.AgentDetailScreen.passUuid(
+                                            encodedUUid
                                         )
-                                    ),
-                                verticalArrangement = Arrangement.Center,
-                                horizontalAlignment = Alignment.CenterHorizontally
+                                    )
+                                },
+                                color = Color.Transparent
                             ) {
-                                AsyncImage(
-                                    model = it.fullPortrait,
-                                    contentDescription = null,
-                                    modifier = Modifier
-                                        .padding(5.dp)
-                                        .fillMaxSize(),
-                                )
+                                Column(
+                                    Modifier
+                                        .fillMaxSize()
+                                        .background(
+                                            brush = Brush.verticalGradient(
+                                                colors = colorList
+                                            )
+                                        ),
+                                    verticalArrangement = Arrangement.Center,
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    AsyncImage(
+                                        model = it.fullPortrait,
+                                        contentDescription = null,
+                                        modifier = Modifier
+                                            .padding(5.dp)
+                                            .fillMaxSize(),
+                                    )
+                                }
                             }
+
+                            Text(
+                                text = it.displayName.toString(),
+                                modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 8.dp),
+                                fontFamily = valorantFont,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = Color(0xffedf0ef)
+                            )
                         }
                     }
                 }
-            }
 
+            }
         }
     }
 }

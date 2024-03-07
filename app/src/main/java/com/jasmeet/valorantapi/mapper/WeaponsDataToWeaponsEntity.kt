@@ -8,6 +8,7 @@ fun Data.toWeaponsEntity():WeaponsEntity{
         uuid = uuid,
         displayName= displayName,
         displayIcon = displayIcon,
-        category= category
+        category= category,
+        skins = skins
     )
 }

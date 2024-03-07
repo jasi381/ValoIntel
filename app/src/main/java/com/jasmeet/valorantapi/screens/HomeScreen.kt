@@ -39,7 +39,7 @@ fun HomeScreen(navHostController: NavHostController) {
             )
             HomeItem(
                 imageUrl = "https://media.valorant-api.com/playercards/adbd4077-4f0f-57c7-d9cd-7e9bc4244646/wideart.png",
-                title = "Weapons",
+                title = "Arsenal",
                 onItemClick = {
                               navHostController.navigate(Screens.WeaponsScreen.route)
                 },

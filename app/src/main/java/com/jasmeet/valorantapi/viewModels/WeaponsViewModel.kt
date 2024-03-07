@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jasmeet.valorantapi.data.agentData.AgentData
 import com.jasmeet.valorantapi.data.weaponData.WeaponData
 import com.jasmeet.valorantapi.data.weaponsApiResponse.Data
 import com.jasmeet.valorantapi.repository.WeaponsRepository
@@ -20,9 +19,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WeaponsViewModel  @Inject constructor(
-
     private val repository: WeaponsRepository,
     @ApplicationContext private val context: Context
+
 ) :ViewModel() {
 
 
@@ -40,7 +39,6 @@ class WeaponsViewModel  @Inject constructor(
                 val result = repository.fetchWeapons(context)
                 if(result is State.Success) {
                     _weaponsApiResponse.postValue(result)
-                    Log.d("TAG", "fetchWeapons: $result")
                 }
             } catch (e: Exception) {
                 _weaponsApiResponse.postValue(State.Error(e.localizedMessage))
@@ -48,13 +46,13 @@ class WeaponsViewModel  @Inject constructor(
         }
     }
 
-    fun fetchAgentData(agentId :String){
+    fun fetchWeaponsData(agentId :String){
         viewModelScope.launch(Dispatchers.IO) {
 
             try {
                 _weaponDetails.postValue(State.Loading)
                 val result = repository.getWeaponsDetails(agentId)
-//                Log.d("TAG", "fetchAgentData: $result")
+                Log.d("WeaponsViewModel", "fetchWeaponsData: $result")
                 if(result is State.Success) {
                     _weaponDetails.postValue(result)
                 }

@@ -10,7 +10,9 @@ import com.jasmeet.valorantapi.screens.AgentDetailScreen
 import com.jasmeet.valorantapi.screens.AgentsScreen
 import com.jasmeet.valorantapi.screens.HomeScreen
 import com.jasmeet.valorantapi.screens.Screens
-import com.jasmeet.valorantapi.screens.UUID
+import com.jasmeet.valorantapi.screens.agentUuid
+import com.jasmeet.valorantapi.screens.weaponUUid
+import com.jasmeet.valorantapi.screens.WeaponDetailsScreen
 import com.jasmeet.valorantapi.screens.WeaponsScreen
 
 @Composable
@@ -39,7 +41,7 @@ fun ValoIntelNavigation(
         composable(
             route = Screens.AgentDetailScreen.route,
             arguments =  listOf(
-                navArgument(UUID){
+                navArgument(agentUuid){
                     type = NavType.StringType
                     defaultValue = "Default"
                     nullable = true
@@ -48,17 +50,31 @@ fun ValoIntelNavigation(
         ) {
             AgentDetailScreen(
                 navHostController = navHostController,
-                agentUUID = it.arguments?.getString(UUID)
+                agentUUID = it.arguments?.getString(agentUuid)
             )
 
 
         }
-
         composable(
             route = Screens.WeaponsScreen.route
         ) {
             WeaponsScreen(navHostController = navHostController)
 
+        }
+
+        composable(
+            route = Screens.WeaponDetailsScreen.route,
+            arguments = listOf(
+                navArgument(weaponUUid){
+                    type = NavType.StringType
+                    defaultValue = "Default"
+                    nullable = true
+                }
+            )
+        ){
+            WeaponDetailsScreen(
+                navHostController = navHostController,
+                weaponUUID = it.arguments?.getString(weaponUUid))
         }
     }
 

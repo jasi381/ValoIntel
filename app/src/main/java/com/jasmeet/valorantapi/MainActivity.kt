@@ -9,7 +9,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import com.jasmeet.valorantapi.navigation.ValoIntelNavigation
-import com.jasmeet.valorantapi.receiver.NetworkChangeReceiver
+import com.jasmeet.valorantapi.receiver.AgentsNetworkChangeReceiver
+import com.jasmeet.valorantapi.receiver.WeaponsNetworkChangeReceiver
 import com.jasmeet.valorantapi.ui.theme.ValorantApiTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,12 +18,17 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val networkChangeReceiver = NetworkChangeReceiver()
+    private val agentsNetworkChangeReceiver = AgentsNetworkChangeReceiver()
+    private val weaponsNetworkChangeReceiver = WeaponsNetworkChangeReceiver()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        registerReceiver(networkChangeReceiver, filter)
+        val agentsFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(agentsNetworkChangeReceiver, agentsFilter)
+
+
+        val weaponsFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(weaponsNetworkChangeReceiver, weaponsFilter)
 
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.light(
@@ -38,12 +44,14 @@ class MainActivity : ComponentActivity() {
             ValorantApiTheme {
                 val navHostController = rememberNavController()
                 ValoIntelNavigation(navHostController = navHostController)
+
             }
         }
     }
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(networkChangeReceiver)
+        unregisterReceiver(agentsNetworkChangeReceiver)
+        unregisterReceiver(weaponsNetworkChangeReceiver)
     }
 }
 

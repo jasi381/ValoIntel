@@ -35,7 +35,7 @@ fun WeaponsEntity.toWeaponsData(): Data {
             shopOrderPriority = 1
 
         ),
-        skins= emptyList(),
+        skins= skins,
         uuid= "",
         weaponStats= WeaponStats(
             adsStats = AdsStats(

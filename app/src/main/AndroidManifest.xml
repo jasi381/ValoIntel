@@ -31,7 +31,7 @@
         <service android:name=".service.AgentsUpdateService"
             android:exported="false"/>
 
-        <receiver android:name=".receiver.NetworkChangeReceiver"
+        <receiver android:name=".receiver.AgentsNetworkChangeReceiver"
             android:enabled="true"
             android:exported="true">
 
@@ -39,7 +39,20 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"
                     tools:ignore="BatteryLife" />
             </intent-filter>
+        </receiver>
 
+
+        <service android:name=".service.WeaponsUpdateService"
+            android:exported="false"/>
+
+        <receiver android:name=".receiver.WeaponsNetworkChangeReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+        <intent-filter>
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE"
+                tools:ignore="BatteryLife" />
+        </intent-filter>
         </receiver>
 
 

@@ -60,6 +60,10 @@ object Utils {
         }
 
     }
+    fun getCategoryName(input: String): String {
+        val categoryName = input.substringAfter("::")
+        return categoryName
+    }
 
 
 
