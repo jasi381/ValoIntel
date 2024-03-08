@@ -67,6 +67,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.jasmeet.valorantapi.appComponents.CustomAnimatedVisibility
+import com.jasmeet.valorantapi.appComponents.LoaderComponent
 import com.jasmeet.valorantapi.appComponents.ShowHideRow
 import com.jasmeet.valorantapi.appComponents.customClickable
 import com.jasmeet.valorantapi.state.State
@@ -120,9 +121,8 @@ fun AgentDetailScreen(navHostController: NavHostController, agentUUID: String?) 
                 Box(
                     Modifier
                         .fillMaxSize()
-
                 ) {
-                    CircularProgressIndicator(Modifier.align(Alignment.Center))
+                    LoaderComponent(modifier = Modifier.size(150.dp).align(Alignment.Center))
                 }
             }
 
@@ -130,8 +130,6 @@ fun AgentDetailScreen(navHostController: NavHostController, agentUUID: String?) 
                 Box(
                     Modifier
                         .fillMaxSize()
-
-
                 ) {
                     Column(
                         modifier = Modifier.align(Alignment.Center)
@@ -515,11 +513,6 @@ fun AgentDetailScreen(navHostController: NavHostController, agentUUID: String?) 
                 }
 
             }
-
         }
-
     }
-
-
-
 }

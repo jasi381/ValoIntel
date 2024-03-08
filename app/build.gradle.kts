@@ -106,4 +106,6 @@ dependencies {
     //Media3
     implementation(libs.media3Ui)
     implementation(libs.media3Exoplayer)
+
+    implementation ("io.coil-kt:coil-gif:2.2.2")
 }

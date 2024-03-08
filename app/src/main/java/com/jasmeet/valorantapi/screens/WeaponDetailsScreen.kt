@@ -53,6 +53,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.jasmeet.valorantapi.appComponents.CustomAnimatedVisibility
+import com.jasmeet.valorantapi.appComponents.LoaderComponent
 import com.jasmeet.valorantapi.state.State
 import com.jasmeet.valorantapi.ui.theme.sans
 import com.jasmeet.valorantapi.utils.Utils
@@ -93,7 +94,7 @@ fun WeaponDetailsScreen(navHostController: NavHostController, weaponUUID: String
                         .fillMaxSize()
 
                 ) {
-                    CircularProgressIndicator(Modifier.align(Alignment.Center))
+                    LoaderComponent(modifier = Modifier.size(150.dp).align(Alignment.Center))
                 }
             }
 

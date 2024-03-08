@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
@@ -34,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.jasmeet.valorantapi.appComponents.LoaderComponent
 import com.jasmeet.valorantapi.appComponents.TopAppBarComponent
 import com.jasmeet.valorantapi.appComponents.animatedBorder
 import com.jasmeet.valorantapi.state.State
@@ -82,7 +84,7 @@ fun WeaponsScreen(navHostController: NavHostController) {
                         .fillMaxSize()
 
                 ) {
-                    CircularProgressIndicator(Modifier.align(Alignment.Center))
+                    LoaderComponent(modifier = Modifier.size(150.dp).align(Alignment.Center))
                 }
             }
 

@@ -10,6 +10,7 @@ import com.jasmeet.valorantapi.screens.AgentDetailScreen
 import com.jasmeet.valorantapi.screens.AgentsScreen
 import com.jasmeet.valorantapi.screens.HomeScreen
 import com.jasmeet.valorantapi.screens.Screens
+import com.jasmeet.valorantapi.screens.SplashScreen
 import com.jasmeet.valorantapi.screens.agentUuid
 import com.jasmeet.valorantapi.screens.weaponUUid
 import com.jasmeet.valorantapi.screens.WeaponDetailsScreen
@@ -23,8 +24,15 @@ fun ValoIntelNavigation(
 
     NavHost(
         navController = navHostController,
-        startDestination = Screens.HomeScreen.route,
+        startDestination = Screens.SplashScreen.route,
     ) {
+
+        composable(
+            route = Screens.SplashScreen.route
+        ) {
+            SplashScreen(navHostController = navHostController)
+
+        }
         composable(
             route = Screens.HomeScreen.route
         ) {
