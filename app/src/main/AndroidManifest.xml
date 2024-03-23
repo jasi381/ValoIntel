@@ -17,7 +17,7 @@
         android:theme="@style/Theme.ValorantApi"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.MainActivity"
             android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/Theme.ValorantApi">
@@ -28,10 +28,10 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.AgentsUpdateService"
+        <service android:name=".presentation.service.AgentsUpdateService"
             android:exported="false"/>
 
-        <receiver android:name=".receiver.AgentsNetworkChangeReceiver"
+        <receiver android:name=".presentation.receiver.AgentsNetworkChangeReceiver"
             android:enabled="true"
             android:exported="true">
 
@@ -42,10 +42,10 @@
         </receiver>
 
 
-        <service android:name=".service.WeaponsUpdateService"
+        <service android:name=".presentation.service.WeaponsUpdateService"
             android:exported="false"/>
 
-        <receiver android:name=".receiver.WeaponsNetworkChangeReceiver"
+        <receiver android:name=".presentation.receiver.WeaponsNetworkChangeReceiver"
             android:enabled="true"
             android:exported="true">
 
@@ -53,6 +53,30 @@
             <action android:name="android.net.conn.CONNECTIVITY_CHANGE"
                 tools:ignore="BatteryLife" />
         </intent-filter>
+        </receiver>
+
+
+        <service android:name=".presentation.service.MapsUpdateService"
+            android:exported="false"/>
+
+        <receiver android:name=".presentation.receiver.MapsNetworkChangeReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"
+                    tools:ignore="BatteryLife" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".presentation.receiver.CurrencyNetworkChangeReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"
+                    tools:ignore="BatteryLife" />
+            </intent-filter>
         </receiver>
 
 

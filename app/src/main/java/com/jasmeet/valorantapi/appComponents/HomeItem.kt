@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.jasmeet.valorantapi.ui.theme.valorantFont
+import com.jasmeet.valorantapi.presentation.theme.valorantFont
 
 @Composable
 fun HomeItem(

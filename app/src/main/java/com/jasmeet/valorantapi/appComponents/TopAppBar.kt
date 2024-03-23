@@ -25,7 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jasmeet.valorantapi.ui.theme.valorantFont
+import com.jasmeet.valorantapi.presentation.theme.valorantFont
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

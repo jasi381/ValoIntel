@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jasmeet.valorantapi.ui.theme.sans
+import com.jasmeet.valorantapi.presentation.theme.sans
 
 @Composable
 fun ShowHideRow(

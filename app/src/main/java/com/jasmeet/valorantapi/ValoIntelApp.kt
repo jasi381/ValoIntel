@@ -7,9 +7,10 @@ import coil.disk.DiskCache
 import coil.memory.MemoryCache
 import coil.request.CachePolicy
 import coil.util.DebugLogger
-import com.jasmeet.valorantapi.repository.AgentsRepository
-import com.jasmeet.valorantapi.repository.WeaponsRepository
-import com.jasmeet.valorantapi.room.agents.AgentsDatabase
+import com.jasmeet.valorantapi.data.repository.AgentsRepository
+import com.jasmeet.valorantapi.data.repository.CurrenciesRepository
+import com.jasmeet.valorantapi.data.repository.MapsRepository
+import com.jasmeet.valorantapi.data.repository.WeaponsRepository
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
@@ -22,6 +23,12 @@ class ValoIntelApp:Application(),ImageLoaderFactory{
 
     @Inject
     lateinit var weaponsRepository: WeaponsRepository
+
+    @Inject
+    lateinit var mapsRepository: MapsRepository
+
+    @Inject
+    lateinit var currencyRepository: CurrenciesRepository
 
 
     override fun newImageLoader(): ImageLoader {
