@@ -13,6 +13,7 @@ sealed class Screens(val route:String){
 
     data object WeaponsScreen: Screens("weapons")
     data object MapsScreen: Screens("maps")
+    data object CurrenciesScreen: Screens("currencies")
     data object AgentDetailScreen: Screens(
         "agentDetail/{$agentUuid}"
     ){

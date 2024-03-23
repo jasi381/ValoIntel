@@ -48,10 +48,11 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.jasmeet.valorantapi.appComponents.CustomAnimatedVisibility
-import com.jasmeet.valorantapi.appComponents.LoaderComponent
-import com.jasmeet.valorantapi.appComponents.ShowHideRow
+import com.jasmeet.appcomponents.LoaderComponent
+import com.jasmeet.valorantapi.R
+import com.jasmeet.valorantapi.presentation.appComponents.CustomAnimatedVisibility
 import com.jasmeet.valorantapi.data.state.State
+import com.jasmeet.valorantapi.presentation.appComponents.ShowHideRow
 import com.jasmeet.valorantapi.presentation.theme.sans
 import com.jasmeet.valorantapi.presentation.utils.Utils
 import com.jasmeet.valorantapi.presentation.viewModels.WeaponsViewModel
@@ -93,7 +94,9 @@ fun WeaponDetailsScreen(navHostController: NavHostController, weaponUUID: String
                 ) {
                     LoaderComponent(modifier = Modifier
                         .size(150.dp)
-                        .align(Alignment.Center))
+                        .align(Alignment.Center),
+                        rawRes = R.raw.loader
+                    )
                 }
             }
 

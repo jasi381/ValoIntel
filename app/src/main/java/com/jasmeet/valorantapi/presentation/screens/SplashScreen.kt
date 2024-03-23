@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
@@ -34,8 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
+import com.jasmeet.appcomponents.LoaderComponent
 import com.jasmeet.valorantapi.R
-import com.jasmeet.valorantapi.appComponents.LoaderComponent
 import com.jasmeet.valorantapi.presentation.theme.valorantFont
 
 @Composable
@@ -78,7 +77,6 @@ fun SplashScreen(navHostController: NavHostController) {
         }
     )
 
-    //Color(0xff0F1822)
 
     Box(
         contentAlignment = Alignment.Center,
@@ -104,8 +102,9 @@ fun SplashScreen(navHostController: NavHostController) {
                 .width(180.dp)
                 .navigationBarsPadding()
                 .align(Alignment.BottomCenter),
+            rawRes = R.raw.loader
 
-            )
+        )
     }
 }
 

@@ -85,8 +85,6 @@ dependencies {
     implementation(libs.materialIcons)
 
 
-    //Lottie
-    implementation(libs.lottie)
 
     //hilt
     implementation(libs.hiltAndroid)
@@ -107,5 +105,8 @@ dependencies {
     implementation(libs.media3Ui)
     implementation(libs.media3Exoplayer)
 
-    implementation ("io.coil-kt:coil-gif:2.2.2")
+    implementation ("com.google.accompanist:accompanist-navigation-material:0.35.0-alpha")
+
+    //appComponents
+    implementation(project(mapOf("path" to ":AppComponents")))
 }

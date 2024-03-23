@@ -34,10 +34,11 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.jasmeet.valorantapi.appComponents.LoaderComponent
-import com.jasmeet.valorantapi.appComponents.TopAppBarComponent
-import com.jasmeet.valorantapi.appComponents.animatedBorder
+import com.jasmeet.appcomponents.LoaderComponent
+import com.jasmeet.appcomponents.animatedBorder
+import com.jasmeet.valorantapi.R
 import com.jasmeet.valorantapi.data.state.State
+import com.jasmeet.valorantapi.presentation.appComponents.TopAppBarComponent
 import com.jasmeet.valorantapi.presentation.theme.valorantFont
 import com.jasmeet.valorantapi.presentation.viewModels.MapsViewModel
 import java.net.URLEncoder
@@ -81,7 +82,9 @@ fun MapsScreen(navHostController: NavHostController) {
                 ) {
                     LoaderComponent(modifier = Modifier
                         .size(150.dp)
-                        .align(Alignment.Center))
+                        .align(Alignment.Center),
+                        rawRes = R.raw.loader
+                    )
                 }
             }
 

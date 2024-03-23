@@ -1,6 +1,5 @@
 package com.jasmeet.valorantapi.presentation.screens
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -30,11 +28,11 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.jasmeet.valorantapi.appComponents.LoaderComponent
-import com.jasmeet.valorantapi.appComponents.TopAppBarComponent
-import com.jasmeet.valorantapi.appComponents.animatedBorder
+import com.jasmeet.appcomponents.LoaderComponent
+import com.jasmeet.appcomponents.animatedBorder
+import com.jasmeet.valorantapi.R
 import com.jasmeet.valorantapi.data.state.State
-import com.jasmeet.valorantapi.presentation.theme.sans
+import com.jasmeet.valorantapi.presentation.appComponents.TopAppBarComponent
 import com.jasmeet.valorantapi.presentation.theme.valorantFont
 import com.jasmeet.valorantapi.presentation.utils.Utils
 import com.jasmeet.valorantapi.presentation.viewModels.AgentsViewModel
@@ -71,7 +69,10 @@ fun AgentsScreen(navHostController: NavHostController) {
                         .fillMaxSize()
 
                 ) {
-                    LoaderComponent(modifier = Modifier.size(150.dp).align(Alignment.Center))
+                    LoaderComponent(
+                        modifier = Modifier.size(150.dp).align(Alignment.Center),
+                        rawRes = R.raw.loader
+                    )
                 }
             }
 
@@ -129,7 +130,7 @@ fun AgentsScreen(navHostController: NavHostController) {
                                             Color.White,
                                             Color.Green,
 
-                                        ),
+                                            ),
                                         backgroundColor = Color.White,
                                         borderWidth = 1.dp
                                     )

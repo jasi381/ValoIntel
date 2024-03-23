@@ -45,20 +45,20 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.jasmeet.valorantapi.appComponents.AnnotatedComposable
-import com.jasmeet.valorantapi.appComponents.CustomAnimatedVisibility
-import com.jasmeet.valorantapi.appComponents.LoaderComponent
-import com.jasmeet.valorantapi.appComponents.ShowHideRow
-import com.jasmeet.valorantapi.appComponents.TopAppBarComponent
-import com.jasmeet.valorantapi.appComponents.animatedBorder
+import com.jasmeet.appcomponents.AnnotatedComposable
+import com.jasmeet.appcomponents.LoaderComponent
+import com.jasmeet.appcomponents.animatedBorder
+import com.jasmeet.valorantapi.R
 import com.jasmeet.valorantapi.data.state.State
+import com.jasmeet.valorantapi.presentation.appComponents.CustomAnimatedVisibility
+import com.jasmeet.valorantapi.presentation.appComponents.ShowHideRow
+import com.jasmeet.valorantapi.presentation.appComponents.TopAppBarComponent
 import com.jasmeet.valorantapi.presentation.theme.sans
 import com.jasmeet.valorantapi.presentation.utils.Utils
 import com.jasmeet.valorantapi.presentation.viewModels.MapsViewModel
@@ -96,7 +96,8 @@ fun MapDetailsScreen(
                 LoaderComponent(
                     modifier = Modifier
                         .size(150.dp)
-                        .align(Alignment.Center)
+                        .align(Alignment.Center),
+                    rawRes = R.raw.loader
                 )
             }
         }
@@ -304,11 +305,13 @@ fun MapDetailsScreen(
                     ) {
 
                         ShowHideRow(
-                            onclick = { showDescription = !showDescription }, text = "Description",
+                            onclick = { showDescription = !showDescription },
+                            text = "Description",
                         )
                         CustomAnimatedVisibility(isVisible = showDescription) {
                             Text(
-                                text = mapDetail.narrativeDescription ?:"No Description Available",
+                                text = mapDetail.narrativeDescription
+                                    ?: "No Description Available",
                                 fontFamily = sans,
                                 modifier = Modifier
                                     .padding(vertical = 16.dp),
@@ -319,18 +322,34 @@ fun MapDetailsScreen(
                         }
 
                         ShowHideRow(
-                            onclick = { showMultiplier = !showMultiplier }, text = "Multipliers",
+                            onclick = { showMultiplier = !showMultiplier },
+                            text = "Multipliers",
                         )
                         CustomAnimatedVisibility(isVisible = showMultiplier) {
                             Column(
                                 modifier = Modifier
-                            ){
+                            ) {
 
-                                val xmulti = if(mapDetail.xMultiplier ==0.0) mapDetail.xMultiplier else Utils.formatScientificNotation(mapDetail.xMultiplier)
-                                AnnotatedComposable(header = "x-Multiplier", content = xmulti.toString())
+                                val xmulti =
+                                    if (mapDetail.xMultiplier == 0.0) mapDetail.xMultiplier else Utils.formatScientificNotation(
+                                        mapDetail.xMultiplier
+                                    )
+                                AnnotatedComposable(
+                                    header = "x-Multiplier",
+                                    content = xmulti.toString(),
+                                    fontFamily = sans
+                                )
 
-                                val ymulti = if(mapDetail.yMultiplier ==0.0) mapDetail.yMultiplier else Utils.formatScientificNotation(mapDetail.yMultiplier)
-                                AnnotatedComposable(header = "y-Multiplier", content = ymulti.toString())
+
+                                val ymulti =
+                                    if (mapDetail.yMultiplier == 0.0) mapDetail.yMultiplier else Utils.formatScientificNotation(
+                                        mapDetail.yMultiplier
+                                    )
+                                AnnotatedComposable(
+                                    header = "y-Multiplier",
+                                    content = ymulti.toString(),
+                                    fontFamily = sans
+                                )
                             }
 
                         }
@@ -341,7 +360,7 @@ fun MapDetailsScreen(
                         CustomAnimatedVisibility(isVisible = showScalar) {
                             Column(
                                 modifier = Modifier
-                            ){
+                            ) {
 
                                 Text(
                                     text = "X-ScalarToAdd : ${mapDetail.xScalarToAdd}",
@@ -364,7 +383,7 @@ fun MapDetailsScreen(
 
                         }
 
-                        if(mapDetail.callouts != null) {
+                        if (mapDetail.callouts != null) {
                             ShowHideRow(
                                 onclick = { showCallOuts = !showCallOuts }, text = "CallOuts",
                             )
@@ -376,21 +395,25 @@ fun MapDetailsScreen(
                                             AnnotatedComposable(
                                                 header = "Region Name",
                                                 content = callout.regionName,
-                                                modifier = Modifier.padding(top = 4.dp)
+                                                modifier = Modifier.padding(top = 4.dp),
+                                                fontFamily = sans
                                             )
                                             AnnotatedComposable(
                                                 header = "Super-Region Name",
                                                 content = callout.superRegionName,
+                                                fontFamily = sans
 
-                                                )
+                                            )
                                             AnnotatedComposable(
                                                 header = "x-Location",
                                                 content = callout.location.x.toString(),
+                                                fontFamily = sans
                                             )
                                             AnnotatedComposable(
                                                 header = "y-Location",
                                                 content = callout.location.y.toString(),
-                                                modifier = Modifier.padding(bottom = 4.dp)
+                                                modifier = Modifier.padding(bottom = 4.dp),
+                                                fontFamily = sans
                                             )
 
                                             HorizontalDivider()

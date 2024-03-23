@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.jasmeet.valorantapi.presentation.screens.AgentDetailScreen
 import com.jasmeet.valorantapi.presentation.screens.AgentsScreen
+import com.jasmeet.valorantapi.presentation.screens.CurrenciesScreen
 import com.jasmeet.valorantapi.presentation.screens.HomeScreen
 import com.jasmeet.valorantapi.presentation.screens.MapDetailsScreen
 import com.jasmeet.valorantapi.presentation.screens.MapsScreen
@@ -108,6 +109,14 @@ fun ValoIntelNavigation(
             MapDetailsScreen(
                 navHostController = navHostController,
                 mapUUID = it.arguments?.getString(mapUUid))
+        }
+
+
+        composable(
+            route = Screens.CurrenciesScreen.route
+        ) {
+            CurrenciesScreen(navHostController = navHostController)
+
         }
     }
 

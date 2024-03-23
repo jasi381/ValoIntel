@@ -36,7 +36,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Fullscreen
 import androidx.compose.material.icons.filled.FullscreenExit
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -66,11 +65,12 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.jasmeet.valorantapi.appComponents.CustomAnimatedVisibility
-import com.jasmeet.valorantapi.appComponents.LoaderComponent
-import com.jasmeet.valorantapi.appComponents.ShowHideRow
-import com.jasmeet.valorantapi.appComponents.customClickable
+import com.jasmeet.appcomponents.LoaderComponent
+import com.jasmeet.appcomponents.customClickable
+import com.jasmeet.valorantapi.R
 import com.jasmeet.valorantapi.data.state.State
+import com.jasmeet.valorantapi.presentation.appComponents.CustomAnimatedVisibility
+import com.jasmeet.valorantapi.presentation.appComponents.ShowHideRow
 import com.jasmeet.valorantapi.presentation.theme.sans
 import com.jasmeet.valorantapi.presentation.utils.Utils
 import com.jasmeet.valorantapi.presentation.viewModels.AgentsViewModel
@@ -122,7 +122,11 @@ fun AgentDetailScreen(navHostController: NavHostController, agentUUID: String?) 
                     Modifier
                         .fillMaxSize()
                 ) {
-                    LoaderComponent(modifier = Modifier.size(150.dp).align(Alignment.Center))
+                    LoaderComponent(
+                        modifier = Modifier.size(150.dp)
+                            .align(Alignment.Center),
+                        rawRes = R.raw.loader
+                    )
                 }
             }
 
