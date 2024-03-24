@@ -20,6 +20,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -27,7 +28,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,7 +40,10 @@ import com.jasmeet.valorantapi.R
 import com.jasmeet.valorantapi.data.state.State
 import com.jasmeet.valorantapi.presentation.appComponents.TopAppBarComponent
 import com.jasmeet.valorantapi.presentation.theme.valorantFont
+import com.jasmeet.valorantapi.presentation.utils.Utils
 import com.jasmeet.valorantapi.presentation.viewModels.WeaponsViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.net.URLEncoder
 
 @Composable
@@ -49,11 +52,6 @@ fun WeaponsScreen(navHostController: NavHostController) {
     val weaponsViewModel: WeaponsViewModel = hiltViewModel()
     val apiResponse by weaponsViewModel.weaponsApiResponse.observeAsState(State.Loading)
 
-    val colors = listOf(
-        Color(0xff978d83),
-        Color(0xffd9d2c5),
-        Color(0xffbfb5a9)
-    )
     var sortAscending by rememberSaveable { mutableStateOf(true) }
 
     LaunchedEffect(key1 = true) {
@@ -85,7 +83,9 @@ fun WeaponsScreen(navHostController: NavHostController) {
 
                 ) {
                     LoaderComponent(
-                        modifier = Modifier.size(150.dp).align(Alignment.Center),
+                        modifier = Modifier
+                            .size(150.dp)
+                            .align(Alignment.Center),
                         rawRes = R.raw.loader
                     )
                 }
@@ -115,6 +115,7 @@ fun WeaponsScreen(navHostController: NavHostController) {
                 } else {
                     state.data.sortedBy { it.displayName }
                 }
+
                 LazyColumn(
                     Modifier
                         .background(Color(0xff101118))
@@ -123,6 +124,16 @@ fun WeaponsScreen(navHostController: NavHostController) {
                 ) {
 
                     items(sortedData){ weaponsData ->
+                        var dominantColors by remember(weaponsData) { mutableStateOf(Color.White to Color.White) }
+
+                        LaunchedEffect(key1 = weaponsData.skins.first().chromas[0].fullRender) {
+                            val colors = withContext(Dispatchers.IO) {
+                                Utils.getDominantColorsFromUrl(weaponsData.skins.first().chromas[0].fullRender)
+                            }
+                            dominantColors = colors
+                        }
+
+
                         Column {
                             Surface(
                                 shape = MaterialTheme.shapes.medium,
@@ -148,9 +159,8 @@ fun WeaponsScreen(navHostController: NavHostController) {
                             ) {
                                 Box(
                                     Modifier.background(
-                                        brush = Brush.horizontalGradient(
-                                            colors = colors,
-                                            tileMode = TileMode.Mirror
+                                        brush = Brush.verticalGradient(
+                                            colors = listOf(dominantColors.first,Color.White.copy(alpha = 0.4f), dominantColors.second),
                                         )
                                     )
                                 ) {
@@ -172,9 +182,11 @@ fun WeaponsScreen(navHostController: NavHostController) {
                             }
                             Text(
                                 text = weaponsData.displayName,
-                                modifier = Modifier.align(Alignment.CenterHorizontally).offset(
-                                    y= (-5).dp
-                                ),
+                                modifier = Modifier
+                                    .align(Alignment.CenterHorizontally)
+                                    .offset(
+                                        y = (-5).dp
+                                    ),
                                 fontFamily = valorantFont,
                                 fontSize = 18.sp,
                                 fontWeight = FontWeight.SemiBold,

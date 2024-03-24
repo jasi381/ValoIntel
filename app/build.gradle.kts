@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kotlinKsp)
     alias(libs.plugins.hiltAndroid)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -88,6 +89,7 @@ dependencies {
 
     //hilt
     implementation(libs.hiltAndroid)
+    implementation(libs.androidx.palette.ktx)
     ksp(libs.hiltCompiler)
     ksp(libs.hiltCompilerKapt)
     implementation (libs.androidx.hilt.navigation.compose)

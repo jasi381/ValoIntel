@@ -1,7 +1,8 @@
 package com.jasmeet.valorantapi.data.mapper.bundlesMapper
 
 import com.jasmeet.valorantapi.data.model.local.BundlesEntity
-import com.jasmeet.valorantapi.data.model.remote.bundleDetails.Data
+import com.jasmeet.valorantapi.data.model.remote.bundlesApiResponse.Data
+
 
 fun Data.toBundlesEntity(): BundlesEntity {
     return BundlesEntity(

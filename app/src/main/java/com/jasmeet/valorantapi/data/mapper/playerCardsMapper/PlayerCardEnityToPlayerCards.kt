@@ -1,9 +1,9 @@
 package com.jasmeet.valorantapi.data.mapper.playerCardsMapper
 
 import com.jasmeet.valorantapi.data.model.local.PlayerCardEntity
-import com.jasmeet.valorantapi.data.model.remote.playerCardDetails.Data
+import com.jasmeet.valorantapi.data.model.remote.playerCardsApiResponse.Data
 
-fun PlayerCardEntity.toPlayerCards():Data{
+fun PlayerCardEntity.toPlayerCards(): Data {
     return Data(
          assetPath = "",
      displayIcon = displayIcon.toString(),

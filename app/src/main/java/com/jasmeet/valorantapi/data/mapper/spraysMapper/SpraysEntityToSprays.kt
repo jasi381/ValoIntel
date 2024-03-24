@@ -1,10 +1,9 @@
 package com.jasmeet.valorantapi.data.mapper.spraysMapper
 
 import com.jasmeet.valorantapi.data.model.local.SprayEntity
-import com.jasmeet.valorantapi.data.model.remote.sprayDetails.Data
-import com.jasmeet.valorantapi.data.model.remote.sprayDetails.Level
+import com.jasmeet.valorantapi.data.model.remote.spraysApiResponse.Data
 
-fun SprayEntity.toSpray():Data{
+fun SprayEntity.toSpray(): Data {
     return Data(
          animationGif =animationGif.toString(),
      animationPng = "",
