@@ -1,5 +1,14 @@
 This will be made once the project ends 
 
+# Tech Stack Used
+- ## Kotlin
+- ## Jetpack Compose
+- ## Okhttp
+- ## Room Db
+- ## Live Data
+- ## ViewModels
+
+
 # Current Progress
 -> Agents screen and Agent Details Screen ready
 
