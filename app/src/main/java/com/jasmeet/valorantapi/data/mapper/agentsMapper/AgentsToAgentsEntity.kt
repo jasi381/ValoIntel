@@ -1,4 +1,4 @@
-package com.jasmeet.valorantapi.data.mapper
+package com.jasmeet.valorantapi.data.mapper.agentsMapper
 
 import com.jasmeet.valorantapi.data.model.local.AgentsEntity
 import com.jasmeet.valorantapi.data.model.remote.agentsApiResponse.Data

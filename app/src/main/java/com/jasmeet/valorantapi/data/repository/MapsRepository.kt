@@ -5,8 +5,8 @@ import com.google.gson.Gson
 import com.jasmeet.valorantapi.data.model.remote.mapData.MapData
 import com.jasmeet.valorantapi.data.model.remote.mapsData.Data
 import com.jasmeet.valorantapi.data.model.remote.mapsData.MapsData
-import com.jasmeet.valorantapi.data.mapper.toMapsData
-import com.jasmeet.valorantapi.data.mapper.toMapsEntity
+import com.jasmeet.valorantapi.data.mapper.mapsMapper.toMapsData
+import com.jasmeet.valorantapi.data.mapper.mapsMapper.toMapsEntity
 import com.jasmeet.valorantapi.data.dao.MapsDao
 import com.jasmeet.valorantapi.data.state.State
 import com.jasmeet.valorantapi.presentation.utils.Utils

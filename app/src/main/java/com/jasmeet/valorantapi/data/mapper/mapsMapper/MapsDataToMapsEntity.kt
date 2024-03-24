@@ -1,4 +1,4 @@
-package com.jasmeet.valorantapi.data.mapper
+package com.jasmeet.valorantapi.data.mapper.mapsMapper
 
 import com.jasmeet.valorantapi.data.model.local.MapsEntity
 import com.jasmeet.valorantapi.data.model.remote.mapsData.Data

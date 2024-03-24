@@ -1,4 +1,4 @@
-package com.jasmeet.valorantapi.data.mapper
+package com.jasmeet.valorantapi.data.mapper.weaponsMapper
 
 
 import com.jasmeet.valorantapi.data.model.local.WeaponsEntity

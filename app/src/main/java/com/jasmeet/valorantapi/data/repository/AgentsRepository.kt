@@ -6,8 +6,8 @@ import com.google.gson.Gson
 import com.jasmeet.valorantapi.data.model.remote.agentData.AgentData
 import com.jasmeet.valorantapi.data.model.remote.agentsApiResponse.AgentsData
 import com.jasmeet.valorantapi.data.model.remote.agentsApiResponse.Data
-import com.jasmeet.valorantapi.data.mapper.toAgentsData
-import com.jasmeet.valorantapi.data.mapper.toAgentsEntity
+import com.jasmeet.valorantapi.data.mapper.agentsMapper.toAgentsData
+import com.jasmeet.valorantapi.data.mapper.agentsMapper.toAgentsEntity
 import com.jasmeet.valorantapi.data.dao.AgentsDao
 import com.jasmeet.valorantapi.data.state.State
 import com.jasmeet.valorantapi.presentation.utils.Utils

@@ -4,8 +4,8 @@ import android.content.Context
 import com.google.gson.Gson
 import com.jasmeet.valorantapi.data.model.remote.currencyApiResponse.CurrencyData
 import com.jasmeet.valorantapi.data.model.remote.currencyApiResponse.Data
-import com.jasmeet.valorantapi.data.mapper.toCurrenciesData
-import com.jasmeet.valorantapi.data.mapper.toCurrencyEntity
+import com.jasmeet.valorantapi.data.mapper.currencyMapper.toCurrenciesData
+import com.jasmeet.valorantapi.data.mapper.currencyMapper.toCurrencyEntity
 import com.jasmeet.valorantapi.data.dao.CurrenciesDao
 import com.jasmeet.valorantapi.data.model.remote.currencyDetails.CurrencyDetails
 import com.jasmeet.valorantapi.data.state.State

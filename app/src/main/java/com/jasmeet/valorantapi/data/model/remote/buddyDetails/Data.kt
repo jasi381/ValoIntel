@@ -6,6 +6,6 @@ data class Data(
     val displayName: String,
     val isHiddenIfNotOwned: Boolean,
     val levels: List<Level>,
-    val themeUuid: Any,
+    val themeUuid: String,
     val uuid: String
 )

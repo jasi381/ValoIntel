@@ -10,5 +10,5 @@ data class BuddiesEntity(
     @PrimaryKey
     val uuid : String,
     val displayName : String,
-    val displayIcon: String?,
+    val displayIcon: String,
 )

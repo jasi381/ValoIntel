@@ -5,8 +5,8 @@ import com.google.gson.Gson
 import com.jasmeet.valorantapi.data.model.remote.weaponData.WeaponData
 import com.jasmeet.valorantapi.data.model.remote.weaponsApiResponse.Data
 import com.jasmeet.valorantapi.data.model.remote.weaponsApiResponse.WeaponsData
-import com.jasmeet.valorantapi.data.mapper.toWeaponsData
-import com.jasmeet.valorantapi.data.mapper.toWeaponsEntity
+import com.jasmeet.valorantapi.data.mapper.weaponsMapper.toWeaponsData
+import com.jasmeet.valorantapi.data.mapper.weaponsMapper.toWeaponsEntity
 import com.jasmeet.valorantapi.data.dao.WeaponsDao
 import com.jasmeet.valorantapi.data.state.State
 import com.jasmeet.valorantapi.presentation.utils.Utils
