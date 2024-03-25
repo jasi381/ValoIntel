@@ -3,10 +3,11 @@ This will be made once the project ends
 # Tech Stack Used
 - ## Kotlin
 - ## Jetpack Compose
-- ## Okhttp
+- ## OkHttp
 - ## Room Db
 - ## Live Data
 - ## ViewModels
+- ## Dagger-Hilt
 
 
 # App Design
@@ -33,7 +34,7 @@ This will be made once the project ends
 
 
 ## Sprays Screen
-[![Jhtlr8X.md.gif](https://iili.io/Jhtlr8X.md.gif)](https://freeimage.host/i/Jhtlr8X)
+![Record_2024-03-25-17-19-10-ezgif com-optimize](https://github.com/jasi381/ValoIntel/assets/60892009/8ee1e7df-4e73-4da4-97de-8772468e695b )
 
 
 ## Weapons Screen
