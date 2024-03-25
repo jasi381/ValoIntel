@@ -9,21 +9,6 @@ This will be made once the project ends
 - ## ViewModels
 
 
-# Current Progress
--> Agents screen and Agent Details Screen ready
-
-
--> Weapons Screen Ready and Weapon Details 
-
-
--> Maps screen and Map Details Screen ready
-
-
--> Currencies Screen Ready and Currency Details (50% done)
-
-
-->Progress Only Repo impl left and few Ui left
-
 # App Design
 
 ## Splash Screen 
@@ -47,12 +32,16 @@ This will be made once the project ends
 [![JhwbTG4.md.jpg](https://iili.io/JhwbTG4.md.jpg)](https://freeimage.host/i/JhwbTG4)
 
 
+## Sprays Screen
+[![Jhtlr8X.md.gif](https://iili.io/Jhtlr8X.md.gif)](https://freeimage.host/i/Jhtlr8X)
+
+
 ## Weapons Screen
-[![JhwbRF2.md.jpg](https://iili.io/JhwbRF2.md.jpg)](https://freeimage.host/i/JhwbRF2)
+[![JhtxTrv.md.jpg](https://iili.io/JhtxTrv.md.jpg)](https://freeimage.host/i/JhtxTrv)
 
 
 ## Weapon Details Screen
-[![Jhwbu6l.md.jpg](https://iili.io/Jhwbu6l.md.jpg)](https://freeimage.host/i/Jhwbu6l)
+[![JhtxA2R.md.jpg](https://iili.io/JhtxA2R.md.jpg)](https://freeimage.host/i/JhtxA2R)
 
 
 ## Maps Screen
@@ -61,3 +50,19 @@ This will be made once the project ends
 
 ## Maps Details Screen
 [![Jhwb5aS.md.jpg](https://iili.io/Jhwb5aS.md.jpg)](https://freeimage.host/i/Jhwb5aS)
+
+
+## Bundles Screen
+[![Jhtu3n1.md.jpg](https://iili.io/Jhtu3n1.md.jpg)](https://freeimage.host/i/Jhtu3n1)
+
+
+## PlayerCards Screen
+[![JhtRnhN.md.jpg](https://iili.io/JhtRnhN.md.jpg)](https://freeimage.host/i/JhtRnhN)
+
+
+## Buddies Screen
+[![JhtuJwB.md.jpg](https://iili.io/JhtuJwB.md.jpg)](https://freeimage.host/i/JhtuJwB)
+
+
+## Currencies Screen
+[![JhtRqpR.md.jpg](https://iili.io/JhtRqpR.md.jpg)](https://freeimage.host/i/JhtRqpR)
