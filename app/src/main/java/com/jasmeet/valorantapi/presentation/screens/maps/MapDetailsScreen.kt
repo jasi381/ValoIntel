@@ -1,4 +1,4 @@
-package com.jasmeet.valorantapi.presentation.screens
+package com.jasmeet.valorantapi.presentation.screens.maps
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween

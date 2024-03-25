@@ -39,6 +39,8 @@ class WeaponsViewModel  @Inject constructor(
                 val result = repository.fetchWeapons(context)
                 if(result is State.Success) {
                     _weaponsApiResponse.postValue(result)
+                }else{
+                    _weaponsApiResponse.postValue(State.Error("Something went wrong"))
                 }
             } catch (e: Exception) {
                 _weaponsApiResponse.postValue(State.Error(e.localizedMessage))
@@ -54,6 +56,8 @@ class WeaponsViewModel  @Inject constructor(
                 val result = repository.getWeaponsDetails(weaponID)
                 if(result is State.Success) {
                     _weaponDetails.postValue(result)
+                }else{
+                    _weaponDetails.postValue(State.Error("Something went wrong"))
                 }
             } catch (e: Exception) {
                 _weaponDetails.postValue(State.Error(e.localizedMessage))

@@ -5,7 +5,6 @@ import com.google.gson.Gson
 import com.jasmeet.valorantapi.data.dao.PlayerCardsDao
 import com.jasmeet.valorantapi.data.mapper.playerCardsMapper.toPlayerCards
 import com.jasmeet.valorantapi.data.mapper.playerCardsMapper.toPlayerCardsEntity
-import com.jasmeet.valorantapi.data.model.remote.playerCardDetails.PlayerCardDetails
 import com.jasmeet.valorantapi.data.model.remote.playerCardsApiResponse.Data
 import com.jasmeet.valorantapi.data.model.remote.playerCardsApiResponse.PlayerCards
 import com.jasmeet.valorantapi.data.state.State
@@ -19,7 +18,7 @@ class PlayerCardsRepository(
     private val  gson = Gson()
 
 
-    suspend fun fetchBuddies(context: Context):State<List<Data>>{
+    suspend fun fetchPlayerCards(context: Context):State<List<Data>>{
 
         return try{
 
@@ -48,26 +47,8 @@ class PlayerCardsRepository(
     }
 
 
-
-    fun getPlayerCardDetails(id:String): State<PlayerCardDetails> {
-        return try{
-            val playerCardData = Utils.makeApiCall(url = playerCardsApiUrl, id = id)
-            if (playerCardData.isNotEmpty()){
-                val data = parsePlayerCardData(playerCardData)
-                State.Success(data)
-            }else{
-                State.Error("Network Error")
-            }
-        }catch (e:Exception){
-            State.Error(e.message.toString())
-        }
-    }
-
     private fun parseApiResponse(result:String): PlayerCards {
         return gson.fromJson(result, PlayerCards::class.java)
     }
 
-    private fun parsePlayerCardData(result:String): PlayerCardDetails {
-        return gson.fromJson(result, PlayerCardDetails::class.java)
-    }
 }

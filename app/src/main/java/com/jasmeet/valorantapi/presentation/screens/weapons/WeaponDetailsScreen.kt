@@ -1,4 +1,4 @@
-package com.jasmeet.valorantapi.presentation.screens
+package com.jasmeet.valorantapi.presentation.screens.weapons
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -42,6 +42,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -56,9 +57,8 @@ import com.jasmeet.valorantapi.presentation.appComponents.ShowHideRow
 import com.jasmeet.valorantapi.presentation.theme.sans
 import com.jasmeet.valorantapi.presentation.utils.Utils
 import com.jasmeet.valorantapi.presentation.viewModels.WeaponsViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import java.net.URLDecoder
+import kotlin.random.Random
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -115,14 +115,13 @@ fun WeaponDetailsScreen(navHostController: NavHostController, weaponUUID: String
 
                 val weaponsData = state.data.data
 
-                var dominantColors by remember { mutableStateOf(Color.White to Color.White) }
+                val randomColor = Color(
+                    Random.nextFloat(),
+                    Random.nextFloat(),
+                    Random.nextFloat(),
+                    1f
+                )
 
-                LaunchedEffect(key1 = imageUrl) {
-                    val colors = withContext(Dispatchers.IO) {
-                        Utils.getDominantColorsFromUrl(imageUrl?:weaponsData.skins.first().chromas[0].fullRender)
-                    }
-                    dominantColors = colors
-                }
 
                 Column {
                     Column(
@@ -130,12 +129,8 @@ fun WeaponDetailsScreen(navHostController: NavHostController, weaponUUID: String
                             .fillMaxWidth()
                             .height(LocalConfiguration.current.screenHeightDp.dp * 0.33f)
                             .background(
-                                brush = Brush.horizontalGradient(
-                                    colors = listOf(
-                                        dominantColors.first,
-                                        Color.White.copy(alpha = 0.3f),
-                                        dominantColors.second
-                                    )
+                                brush = Brush.verticalGradient(
+                                    colors = listOf(randomColor,Color.Transparent)
                                 )
                             )
                     ) {
@@ -232,21 +227,20 @@ fun WeaponDetailsScreen(navHostController: NavHostController, weaponUUID: String
 
                                 items(skins) { skin ->
 
-                                    var dominantColors2 by remember(skin.displayIcon) { mutableStateOf(Color.White to Color.White)  }
 
-                                    LaunchedEffect(key1 = skin.displayIcon) {
-                                        val color = withContext(Dispatchers.IO) {
-                                            Utils.getDominantColorsFromUrl(skin.displayIcon)
-                                        }
-                                        dominantColors2 = color
-                                    }
+                                    val randomColors = Color(
+                                        Random.nextFloat(),
+                                        Random.nextFloat(),
+                                        Random.nextFloat(),
+                                        1f
+                                    )
                                     Column(
                                         modifier = Modifier
                                             .padding(top = 10.dp)
                                             .fillMaxWidth()
                                             .background(
-                                                brush = Brush.radialGradient(
-                                                    colors = listOf(dominantColors2.first, dominantColors2.second),
+                                                brush = Brush.verticalGradient(
+                                                    colors = listOf(randomColors,Color.Transparent)
                                                 ),
                                                 shape = MaterialTheme.shapes.medium
                                             )
@@ -273,7 +267,7 @@ fun WeaponDetailsScreen(navHostController: NavHostController, weaponUUID: String
                                             fontSize = 16.sp,
                                             fontWeight = FontWeight.SemiBold,
                                             color = Color(0xffedf0ef),
-                                            maxLines = 1,
+                                            textAlign = TextAlign.Center,
                                             overflow = TextOverflow.Ellipsis,
                                             modifier = Modifier.padding(
                                                 bottom = 5.dp,

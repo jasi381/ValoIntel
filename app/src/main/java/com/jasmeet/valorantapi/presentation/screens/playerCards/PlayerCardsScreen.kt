@@ -1,16 +1,17 @@
-package com.jasmeet.valorantapi.presentation.screens
+package com.jasmeet.valorantapi.presentation.screens.playerCards
 
+import android.os.Build
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -20,48 +21,52 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import coil.compose.AsyncImage
+import coil.ImageLoader
+import coil.compose.rememberAsyncImagePainter
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
 import com.jasmeet.appcomponents.LoaderComponent
 import com.jasmeet.appcomponents.animatedBorder
 import com.jasmeet.valorantapi.R
 import com.jasmeet.valorantapi.data.state.State
 import com.jasmeet.valorantapi.presentation.appComponents.TopAppBarComponent
 import com.jasmeet.valorantapi.presentation.theme.valorantFont
-import com.jasmeet.valorantapi.presentation.utils.Utils
-import com.jasmeet.valorantapi.presentation.viewModels.WeaponsViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import java.net.URLEncoder
+import com.jasmeet.valorantapi.presentation.viewModels.BundlesViewModel
+import com.jasmeet.valorantapi.presentation.viewModels.PlayerCardsViewModel
 
 @Composable
-fun WeaponsScreen(navHostController: NavHostController) {
+fun PlayerCardsScreen(navHostController: NavHostController) {
 
-    val weaponsViewModel: WeaponsViewModel = hiltViewModel()
-    val apiResponse by weaponsViewModel.weaponsApiResponse.observeAsState(State.Loading)
+    val context = LocalContext.current
+
+    val playerCardsViewModel: PlayerCardsViewModel = hiltViewModel()
+    val apiResponse by playerCardsViewModel.playerCardsApiResponse.observeAsState(State.Loading)
 
     var sortAscending by rememberSaveable { mutableStateOf(true) }
 
-    LaunchedEffect(key1 = true) {
-        weaponsViewModel.fetchWeapons()
+    LaunchedEffect(true) {
+        playerCardsViewModel.fetchPlayerCards()
     }
+
 
     Scaffold(
         topBar = {
             TopAppBarComponent(
-                title = "Arsenal",
+                title = "Player Cards",
                 enableBackButton = true,
                 onBackClick = {
                     navHostController.popBackStack()
@@ -74,6 +79,7 @@ fun WeaponsScreen(navHostController: NavHostController) {
             )
         }
     ) { innerPadding ->
+
 
         when (val state = apiResponse) {
             is State.Loading -> {
@@ -110,98 +116,94 @@ fun WeaponsScreen(navHostController: NavHostController) {
 
             is State.Success -> {
 
+
                 val sortedData = if (sortAscending) {
                     state.data
                 } else {
                     state.data.sortedBy { it.displayName }
                 }
 
-                LazyColumn(
-                    Modifier
+
+                LazyVerticalStaggeredGrid(
+                    columns = StaggeredGridCells.Fixed(2),
+                    modifier = Modifier.fillMaxSize()
                         .background(Color(0xff101118))
                         .fillMaxSize()
+                        .padding(start = 8.dp, end = 8.dp)
                         .padding(innerPadding),
+                    horizontalArrangement = Arrangement.spacedBy(25.dp),
+                    verticalItemSpacing = 25.dp
+
                 ) {
-
-                    items(sortedData){ weaponsData ->
-                        var dominantColors by remember(weaponsData) { mutableStateOf(Color.White to Color.White) }
-
-                        LaunchedEffect(key1 = weaponsData.skins.first().chromas[0].fullRender) {
-                            val colors = withContext(Dispatchers.IO) {
-                                Utils.getDominantColorsFromUrl(weaponsData.skins.first().chromas[0].fullRender)
-                            }
-                            dominantColors = colors
-                        }
-
+                    items(sortedData){ playerCard->
 
                         Column {
                             Surface(
-                                shape = MaterialTheme.shapes.medium,
-                                onClick = {
-                                    val encodedUUid = URLEncoder.encode(weaponsData.uuid, "UTF-8")
-                                    navHostController.navigate(
-                                        Screens.WeaponDetailsScreen.passUuid(
-                                            encodedUUid
-                                        )
-                                    )
-                                },
                                 modifier = Modifier
-                                    .padding(horizontal = 16.dp, vertical = 10.dp)
-                                    .fillMaxWidth()
-                                    .height(80.dp)
+                                    .padding(top = 10.dp)
                                     .animatedBorder(
                                         borderColors = listOf(
-                                            Color(0xffc7f458),
-                                            Color(0xff3a7233)
-                                        ),
+                                            Color(0xffffffff),
+                                            Color(0xffff4654),
+
+
+                                            ),
                                         backgroundColor = Color.White,
+                                        borderWidth = 1.dp
                                     )
+                                    .size(180.dp,210.dp),
+                                shape = MaterialTheme.shapes.large,
+                                color = Color.Transparent
                             ) {
-                                Box(
-                                    Modifier.background(
-                                        brush = Brush.verticalGradient(
-                                            colors = listOf(dominantColors.first,Color.White.copy(alpha = 0.4f), dominantColors.second),
-                                        )
-                                    )
+                                Column(
+                                    Modifier
+                                        .fillMaxSize(),
+                                    verticalArrangement = Arrangement.Center,
+                                    horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
-                                    AsyncImage(
-                                        model = weaponsData.skins.first().chromas[0].fullRender,
+
+                                    val imageLoader = ImageLoader.Builder(context).components {
+                                        if (Build.VERSION.SDK_INT >= 28) {
+                                            add(ImageDecoderDecoder.Factory())
+                                        } else {
+                                            add(GifDecoder.Factory())
+                                        }
+                                    }.build()
+
+                                    val painter = rememberAsyncImagePainter(
+                                        model = playerCard.largeArt,
+                                        imageLoader = imageLoader,
+                                    )
+
+                                    Image(
+                                        painter = painter,
                                         contentDescription = null,
                                         modifier = Modifier
-                                            .padding(
-                                                vertical = 10.dp,
-                                                horizontal = 15.dp
-                                            )
-                                            .fillMaxSize()
+                                            .padding(2.dp)
                                             .clip(MaterialTheme.shapes.medium)
-                                            .align(Alignment.Center)
+                                            .fillMaxSize(),
+                                        contentScale = ContentScale.FillBounds
                                     )
-
                                 }
-
                             }
+
                             Text(
-                                text = weaponsData.displayName,
-                                modifier = Modifier
-                                    .align(Alignment.CenterHorizontally)
-                                    .offset(
-                                        y = (-5).dp
-                                    ),
+                                text = playerCard.displayName,
+                                modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 8.dp),
                                 fontFamily = valorantFont,
                                 fontSize = 18.sp,
                                 fontWeight = FontWeight.SemiBold,
-                                color = Color(0xffedf0ef)
+                                color = Color(0xffedf0ef),
+                                textAlign = TextAlign.Center
                             )
                         }
+
                     }
 
                 }
 
             }
         }
-
-
     }
-
 
 }

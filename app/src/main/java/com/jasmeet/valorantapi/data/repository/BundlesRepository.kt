@@ -5,7 +5,6 @@ import com.google.gson.Gson
 import com.jasmeet.valorantapi.data.dao.BundleDao
 import com.jasmeet.valorantapi.data.mapper.bundlesMapper.toBundles
 import com.jasmeet.valorantapi.data.mapper.bundlesMapper.toBundlesEntity
-import com.jasmeet.valorantapi.data.model.remote.bundleDetails.BundleDetails
 import com.jasmeet.valorantapi.data.model.remote.bundlesApiResponse.Bundles
 import com.jasmeet.valorantapi.data.model.remote.bundlesApiResponse.Data
 import com.jasmeet.valorantapi.data.state.State
@@ -19,7 +18,7 @@ class BundlesRepository(
     private val  gson = Gson()
 
     suspend fun fetchBundles(context: Context):State<List<Data>>{
-       return  try {
+        return  try {
             if (Utils.isNetworkAvailable(context)) {
                 val result = Utils.makeApiCall(bundlesApiUrl)
                 if (result.isNotEmpty()){
@@ -42,28 +41,10 @@ class BundlesRepository(
         }
     }
 
-
-    fun getBuddyDetails(buddyId:String): State<BundleDetails> {
-        return try{
-            val buddyData = Utils.makeApiCall(url = bundlesApiUrl, id = buddyId)
-            if (buddyData.isNotEmpty()){
-                val data = parseBundleData(buddyData)
-                State.Success(data)
-            }else{
-                State.Error("Network Error")
-            }
-        }catch (e:Exception){
-            State.Error(e.message.toString())
-        }
-    }
-
     private fun parseApiResponse(result:String): Bundles {
         return gson.fromJson(result, Bundles::class.java)
     }
 
-    private fun parseBundleData(result:String): BundleDetails {
-        return gson.fromJson(result, BundleDetails::class.java)
-    }
 
 
 }

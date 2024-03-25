@@ -38,6 +38,8 @@ class AgentsViewModel @Inject constructor(
                 val result = repository.fetchAgents(context)
                 if(result is State.Success) {
                     _agentsApiResponse.postValue(result)
+                }else{
+                    _agentsApiResponse.postValue(State.Error("Something went wrong"))
                 }
             } catch (e: Exception) {
                 _agentsApiResponse.postValue(State.Error(e.localizedMessage))
@@ -53,6 +55,8 @@ class AgentsViewModel @Inject constructor(
                 val result = repository.getAgentDetails(agentId)
                 if(result is State.Success) {
                     _agentDetails.postValue(result)
+                }else{
+                    _agentDetails.postValue(State.Error("Something went wrong"))
                 }
             } catch (e: Exception) {
                 _agentDetails.postValue(State.Error(e.localizedMessage))

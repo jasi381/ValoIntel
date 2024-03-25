@@ -1,4 +1,4 @@
-package com.jasmeet.valorantapi.presentation.screens
+package com.jasmeet.valorantapi.presentation.screens.agents
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,6 +33,7 @@ import com.jasmeet.appcomponents.animatedBorder
 import com.jasmeet.valorantapi.R
 import com.jasmeet.valorantapi.data.state.State
 import com.jasmeet.valorantapi.presentation.appComponents.TopAppBarComponent
+import com.jasmeet.valorantapi.presentation.screens.Screens
 import com.jasmeet.valorantapi.presentation.theme.valorantFont
 import com.jasmeet.valorantapi.presentation.utils.Utils
 import com.jasmeet.valorantapi.presentation.viewModels.AgentsViewModel

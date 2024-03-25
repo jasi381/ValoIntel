@@ -38,6 +38,8 @@ class MapsViewModel  @Inject constructor(
                 val result = repository.fetchMaps(context)
                 if (result is State.Success){
                     _mapsApiResponse.postValue(result)
+                }else{
+                    _mapsApiResponse.postValue(State.Error("Something went wrong"))
                 }
             }catch (e:Exception){
                 _mapsApiResponse.postValue(State.Error(e.localizedMessage))
@@ -54,6 +56,8 @@ class MapsViewModel  @Inject constructor(
                 Log.d("MapsViewModel", "fetchMapData: $result")
                 if(result is State.Success) {
                     _mapDetails.postValue(result)
+                }else{
+                    _mapDetails.postValue(State.Error("Something went wrong"))
                 }
             } catch (e: Exception) {
                 _mapDetails.postValue(State.Error(e.localizedMessage))

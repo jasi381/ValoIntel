@@ -52,7 +52,9 @@ fun HomeScreen(navHostController: NavHostController) {
             HomeItem(
                 imageUrl = "https://media.valorant-api.com/bundles/d958b181-4e7b-dc60-7c3c-e3a3a376a8d2/displayicon.png",
                 title = "Bundles" ,
-                onItemClick = { /*TODO*/ },
+                onItemClick = {
+                              navHostController.navigate(Screens.BundlesScreen.route)
+                },
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier.height(125.dp)
             )
@@ -80,7 +82,9 @@ fun HomeScreen(navHostController: NavHostController) {
             HomeItem(
                 imageUrl = "https://media.valorant-api.com/sprays/9f78cf1d-4c55-71a0-f920-d6b5c8a21db0/animation.gif",
                 title = "Sprays",
-                onItemClick = {},
+                onItemClick = {
+                    navHostController.navigate(Screens.SpraysScreen.route)
+                },
                 modifier = Modifier.padding(vertical = 12.dp).height(80.dp),
                 enableGifSupport = true
             )
@@ -88,7 +92,9 @@ fun HomeScreen(navHostController: NavHostController) {
             HomeItem(
                 imageUrl = "https://staticg.sportskeeda.com/editor/2021/09/5916c-16304972176281.png",
                 title = "Buddies",
-                onItemClick = {},
+                onItemClick = {
+                    navHostController.navigate(Screens.BuddiesScreen.route)
+                },
                 modifier = Modifier
 
                     .height(80.dp)
@@ -96,7 +102,9 @@ fun HomeScreen(navHostController: NavHostController) {
             HomeItem(
                 imageUrl = "https://media.valorant-api.com/playercards/fc209787-414b-10d0-dcac-04832fc2c654/wideart.png",
                 title = "Player Cards",
-                onItemClick = {},
+                onItemClick = {
+                    navHostController.navigate(Screens.PlayerCardsScreen.route)
+                },
                 modifier = Modifier.padding(vertical = 12.dp).height(80.dp)
             )
             HomeItem(

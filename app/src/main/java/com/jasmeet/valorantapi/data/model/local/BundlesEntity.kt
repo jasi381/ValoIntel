@@ -8,8 +8,8 @@ data class BundlesEntity(
     @PrimaryKey()
     val uuid: String,
     val displayName: String,
-    val displayIcon: String,
-    val displayIcon2: String,
-    val verticalPromoImage: String,
+    val displayIcon: String?,
+    val displayIcon2: String?,
+    val verticalPromoImage: String?,
 
 )

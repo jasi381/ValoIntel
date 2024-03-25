@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
 
     //Okhttp
     implementation (libs.okhttp)
@@ -71,8 +72,6 @@ dependencies {
     //Gson
     implementation (libs.gson)
 
-    //livedata
-    implementation(libs.androidx.runtime.livedata)
 
     //coil compose
     implementation(libs.coil.compose)
@@ -84,7 +83,6 @@ dependencies {
 
     //material icons
     implementation(libs.materialIcons)
-
 
 
     //hilt
@@ -106,8 +104,7 @@ dependencies {
     //Media3
     implementation(libs.media3Ui)
     implementation(libs.media3Exoplayer)
-
-    implementation ("com.google.accompanist:accompanist-navigation-material:0.35.0-alpha")
+    
 
     //appComponents
     implementation(project(mapOf("path" to ":AppComponents")))

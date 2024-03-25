@@ -8,8 +8,8 @@ fun BundlesEntity.toBundles(): Data {
     return Data(
          assetPath= "",
      description= "",
-     displayIcon= displayIcon,
-     displayIcon2= displayIcon2,
+     displayIcon= displayIcon.toString(),
+     displayIcon2= displayIcon2.toString(),
      displayName= displayName,
      displayNameSubText= "",
      extraDescription= "",
@@ -17,7 +17,7 @@ fun BundlesEntity.toBundles(): Data {
      promoDescription= "",
      useAdditionalContext= false,
      uuid= uuid,
-     verticalPromoImage= verticalPromoImage
+     verticalPromoImage= verticalPromoImage.toString()
 
     )
 }

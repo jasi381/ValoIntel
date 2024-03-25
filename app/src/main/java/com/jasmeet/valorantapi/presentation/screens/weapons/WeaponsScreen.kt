@@ -1,9 +1,8 @@
-package com.jasmeet.valorantapi.presentation.screens
+package com.jasmeet.valorantapi.presentation.screens.weapons
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,8 +25,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,27 +38,28 @@ import com.jasmeet.appcomponents.animatedBorder
 import com.jasmeet.valorantapi.R
 import com.jasmeet.valorantapi.data.state.State
 import com.jasmeet.valorantapi.presentation.appComponents.TopAppBarComponent
+import com.jasmeet.valorantapi.presentation.screens.Screens
 import com.jasmeet.valorantapi.presentation.theme.valorantFont
-import com.jasmeet.valorantapi.presentation.viewModels.MapsViewModel
+import com.jasmeet.valorantapi.presentation.viewModels.WeaponsViewModel
 import java.net.URLEncoder
+import kotlin.random.Random
 
 @Composable
-fun MapsScreen(navHostController: NavHostController) {
+fun WeaponsScreen(navHostController: NavHostController) {
 
-    val mapsViewModel : MapsViewModel = hiltViewModel()
-    val apiResponse by mapsViewModel.mapsApiResponse.observeAsState(State.Loading)
+    val weaponsViewModel: WeaponsViewModel = hiltViewModel()
+    val apiResponse by weaponsViewModel.weaponsApiResponse.observeAsState(State.Loading)
 
     var sortAscending by rememberSaveable { mutableStateOf(true) }
 
-
-    LaunchedEffect(true) {
-        mapsViewModel.fetchMaps()
+    LaunchedEffect(key1 = true) {
+        weaponsViewModel.fetchWeapons()
     }
 
     Scaffold(
         topBar = {
             TopAppBarComponent(
-                title = "Maps",
+                title = "Arsenal",
                 enableBackButton = true,
                 onBackClick = {
                     navHostController.popBackStack()
@@ -80,9 +80,10 @@ fun MapsScreen(navHostController: NavHostController) {
                         .fillMaxSize()
 
                 ) {
-                    LoaderComponent(modifier = Modifier
-                        .size(150.dp)
-                        .align(Alignment.Center),
+                    LoaderComponent(
+                        modifier = Modifier
+                            .size(150.dp)
+                            .align(Alignment.Center),
                         rawRes = R.raw.loader
                     )
                 }
@@ -107,32 +108,36 @@ fun MapsScreen(navHostController: NavHostController) {
 
             is State.Success -> {
 
-                val sortedData = if(sortAscending){
+                val sortedData = if (sortAscending) {
                     state.data
-                }else{
-                    state.data.sortedBy {
-                        it.displayName
-                    }
+                } else {
+                    state.data.sortedBy { it.displayName }
                 }
-
 
                 LazyColumn(
                     Modifier
                         .background(Color(0xff101118))
                         .fillMaxSize()
-                        .padding(innerPadding)
+                        .padding(innerPadding),
                 ) {
-                    item {
-                        Spacer(modifier =Modifier.height(10.dp))
-                    }
-                    items(sortedData){mapsData ->
+
+                    items(sortedData){ weaponsData ->
+
+                        val randomColor = Color(
+                            Random.nextFloat(),
+                            Random.nextFloat(),
+                            Random.nextFloat(),
+                            1f
+                        )
+
+
                         Column {
                             Surface(
                                 shape = MaterialTheme.shapes.medium,
                                 onClick = {
-                                    val encodedUUid = URLEncoder.encode(mapsData.uuid, "UTF-8")
+                                    val encodedUUid = URLEncoder.encode(weaponsData.uuid, "UTF-8")
                                     navHostController.navigate(
-                                        Screens.MapDetailsScreen.passUuid(
+                                        Screens.WeaponDetailsScreen.passUuid(
                                             encodedUUid
                                         )
                                     )
@@ -140,7 +145,7 @@ fun MapsScreen(navHostController: NavHostController) {
                                 modifier = Modifier
                                     .padding(horizontal = 16.dp, vertical = 10.dp)
                                     .fillMaxWidth()
-                                    .height(110.dp)
+                                    .height(80.dp)
                                     .animatedBorder(
                                         borderColors = listOf(
                                             Color(0xffc7f458),
@@ -149,22 +154,32 @@ fun MapsScreen(navHostController: NavHostController) {
                                         backgroundColor = Color.White,
                                     )
                             ) {
-                                Box{
+                                Box(
+                                    Modifier.background(
+                                        brush = Brush.horizontalGradient(
+                                        colors = listOf(randomColor,Color.Black.copy(alpha = 0.25f),Color.Transparent)
+                                        )
+
+                                    )
+                                ) {
                                     AsyncImage(
-                                        model = mapsData.listViewIcon,
+                                        model = weaponsData.skins.first().chromas[0].fullRender,
                                         contentDescription = null,
                                         modifier = Modifier
+                                            .padding(
+                                                vertical = 10.dp,
+                                                horizontal = 15.dp
+                                            )
                                             .fillMaxSize()
                                             .clip(MaterialTheme.shapes.medium)
-                                            .align(Alignment.Center),
-                                        contentScale = ContentScale.FillBounds
+                                            .align(Alignment.Center)
                                     )
 
                                 }
 
                             }
                             Text(
-                                text = mapsData.displayName,
+                                text = weaponsData.displayName,
                                 modifier = Modifier
                                     .align(Alignment.CenterHorizontally)
                                     .offset(
@@ -177,11 +192,14 @@ fun MapsScreen(navHostController: NavHostController) {
                             )
                         }
                     }
+
                 }
 
             }
         }
 
+
     }
+
 
 }

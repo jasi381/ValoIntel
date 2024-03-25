@@ -1,4 +1,4 @@
-package com.jasmeet.valorantapi.presentation.screens
+package com.jasmeet.valorantapi.presentation.screens.agents
 
 import android.annotation.SuppressLint
 import androidx.activity.compose.BackHandler
@@ -222,7 +222,9 @@ fun AgentDetailScreen(navHostController: NavHostController, agentUUID: String?) 
 
                             }
 
-                            Box(modifier = Modifier.fillMaxSize()) {
+                            Box(
+                                modifier = Modifier.fillMaxSize()
+                            ) {
                                 AsyncImage(
                                     model = imageUrl ?: agentData.fullPortraitV2,
                                     contentDescription = null,
