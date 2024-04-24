@@ -1,13 +1,11 @@
-This will be made once the project ends 
-
 # Tech Stack Used
-- ## Kotlin
-- ## Jetpack Compose
-- ## OkHttp
-- ## Room Db
-- ## Live Data
-- ## ViewModels
-- ## Dagger-Hilt
+* ## Kotlin
+* ## Jetpack Compose
+* ## OkHttp
+* ## Room Db
+* ## Live Data
+* ## ViewModel
+* ## Dagger-Hilt
 
 
 # App Design
