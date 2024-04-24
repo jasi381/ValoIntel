@@ -1,5 +1,3 @@
-This will be made once the project ends 
-
 # Tech Stack Used
 - ## Kotlin
 - ## Jetpack Compose
